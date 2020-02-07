@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>CareerDevs Articles</title>
+  </head>
+  <body>
+    <dev id="article_1"></dev> <break></break>
+    <dev id="article_2">article 2</dev> <break></break>
+    <dev id="article_3">article 3</dev> <break></break>
+  </body>
+  <script>
+    console.log("hello");
+    const xhr = new XMLHttpRequest();
+
+    xhr.open("GET", "localhost:3000/api/articles", true);
+
+    xhr.onload = () => {
+      const parsedData = JSON.parse(xhr.responseText);
+
+      console.log(parsedData);
+      // document.getElementById("article_1").innerText = parsedData[0].name;
+      // document.gta.weather[0].description;
+    };
+
+    xhr.send();
+  </script>
+</html>
