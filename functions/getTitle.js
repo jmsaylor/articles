@@ -8,6 +8,8 @@ async function getTitle(url) {
   return response;
 }
 
+module.exports = getTitle;
+
 ///////////*  testing   see console  *////////////
 
 function checkA() {
@@ -24,4 +26,4 @@ async function displayTitle() {
 }
 
 // checkA();
-displayTitle();
+// displayTitle();

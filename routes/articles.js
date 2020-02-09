@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
+const getTitle = require("../functions/getTitle");
 const router = express.Router();
 const { Article } = require("../models/article");
 
@@ -11,7 +12,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   let article = new Article({
     poster: req.body.poster,
-    name: req.body.name,
+    name: await getTitle(req.body.article),
     article: req.body.article
   });
 
