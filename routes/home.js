@@ -1,10 +1,13 @@
 const path = require("path");
 const express = require("express");
 const router = express.Router();
+const fetch = require("node-fetch");
+const { Article } = require("../models/article");
 
-let directory =
-  "/home/yamakito/CareerDevs/javascript101/fundamentals/api101/Capstone_Project/html";
-
-router.get("/", (req, res) => res.sendFile(path.join(directory, "index.html")));
+router.get("/", async (req, res) => {
+  try {
+    res.sendFile(path.join(__dirname, "../views/home.html"));
+  } catch (error) {}
+});
 
 module.exports = router;
