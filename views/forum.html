@@ -3,31 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <p>Forum</p>
-  </body>
-</html>
-<script></script>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
   </head>
   <body>
-    <p id="article_1"></p>
-    <div id="article_2"></div>
-    <div id="article_3"></div>
     <script>
-      let div = document.getElementById("weather");
+      document.body.style.background = "white";
 
       let url = "http://localhost:3000/api/articles";
-
-      // -- think creative ways to rotate through json info of different cities
 
       const xhr = new XMLHttpRequest();
 
@@ -37,8 +20,16 @@
         const parsedData = JSON.parse(xhr.responseText);
 
         console.log(parsedData);
-        document.getElementById("article_1").innerText = parsedData[0].name;
-        document.getElementById("article_2").innerText = parsedData[1].name;
+
+        for (x in parsedData) {
+          let textNode = document.createElement("p");
+          textNode.innerHTML = parsedData[x].name;
+          let linkNode = document.createElement("a");
+          linkNode.innerHTML = parsedData[x].article;
+          linkNode.href = parsedData[x].article;
+          document.body.appendChild(textNode);
+          document.body.appendChild(linkNode);
+        }
       };
 
       xhr.send();
