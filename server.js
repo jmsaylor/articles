@@ -3,7 +3,9 @@ const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const home = require("./routes/home");
+const forum = require("./routes/forum");
 const articles = require("./routes/articles");
+require("cors");
 dotenv.config();
 
 options = {
@@ -22,6 +24,7 @@ mongoose
 app.use(express.json());
 app.use("/", home);
 app.use("/api/articles", articles);
+app.use("/forum", forum);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`LISTENING ON PORT: ${port}`));
