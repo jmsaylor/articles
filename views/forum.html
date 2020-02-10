@@ -22,13 +22,23 @@
         console.log(parsedData);
 
         for (x in parsedData) {
-          let textNode = document.createElement("p");
-          textNode.innerHTML = parsedData[x].name;
-          let linkNode = document.createElement("a");
-          linkNode.innerHTML = parsedData[x].article;
-          linkNode.href = parsedData[x].article;
-          document.body.appendChild(textNode);
-          document.body.appendChild(linkNode);
+          const article = document.createElement("div");
+          article.innerHTML = parsedData[x].name;
+
+          const link = document.createElement("a");
+          link.innerHTML = parsedData[x].article;
+          link.href = parsedData[x].article;
+
+          const button = document.createElement("button");
+          button.innerHTML = "Like";
+
+          const likeCount = document.createElement("p");
+          likeCount.innerHTML = parsedData[x].likes;
+
+          document.body.appendChild(article);
+          document.body.appendChild(link);
+          document.body.appendChild(button);
+          document.body.appendChild(likeCount);
         }
       };
 
