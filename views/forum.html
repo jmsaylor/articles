@@ -10,40 +10,40 @@
     <script>
       document.body.style.background = "white";
 
-      let url = "http://localhost:3000/api/articles";
+      async function apiCall() {
+        let res = await fetch("http://localhost:3000/api/articles");
 
-      const xhr = new XMLHttpRequest();
+        return res.json();
+      }
 
-      xhr.open("GET", url, true);
-
-      xhr.onload = () => {
-        const parsedData = JSON.parse(xhr.responseText);
-
-        console.log(parsedData);
-
-        for (x in parsedData) {
+      async function display() {
+        let res = await apiCall();
+        for (let x = 0; x < res.length; x++) {
           const article = document.createElement("div");
-          article.innerHTML = parsedData[x].name;
+          article.innerHTML = res[x].name;
 
           const link = document.createElement("a");
-          link.innerHTML = parsedData[x].article;
-          link.href = parsedData[x].article;
+          link.innerHTML = res[x].article;
+          link.href = res[x].article;
 
           const button = document.createElement("button");
           button.innerHTML = "Like";
           //   button.setAttribute("OnClick");
 
           const likeCount = document.createElement("p");
-          likeCount.innerHTML = parsedData[x].likes;
+          likeCount.innerHTML = res[x].likes;
 
           document.body.appendChild(article);
           document.body.appendChild(link);
           document.body.appendChild(button);
           document.body.appendChild(likeCount);
         }
-      };
+      }
 
-      xhr.send();
+      // async function makeDOM() {
+      //   let res = apiCall();
+
+      display();
     </script>
   </body>
 </html>
