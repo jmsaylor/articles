@@ -15,7 +15,7 @@ let Article = mongoose.model(
     },
     name: {
       type: String,
-      default: "Blank Name Field" //wanted to create default value with something from url
+      default: "Blank Name Field" // see /functions/getTitle
     },
     likes: {
       type: Number,

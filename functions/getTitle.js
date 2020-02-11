@@ -1,11 +1,14 @@
 const fetch = require("node-fetch");
 
 async function getTitle(url) {
-  let response = await fetch(url)
-    .then(res => res.text())
-    .then(body => body.match(/<title>(?<title>.*)<\/title>/i).groups.title);
-
-  return response;
+  try {
+    let response = await fetch(url)
+      .then(res => res.text())
+      .then(body => body.match(/<title>(?<title>.*)<\/title>/i).groups.title);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 module.exports = getTitle;
@@ -19,9 +22,7 @@ function checkA() {
 }
 
 async function displayTitle() {
-  let A = await getTitle(
-    "https://dolphin-emu.org/blog/2020/02/07/dolphin-progress-report-dec-2019-and-jan-2020/"
-  );
+  let A = await getTitle();
   console.log(A);
 }
 
