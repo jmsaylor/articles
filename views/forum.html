@@ -7,6 +7,7 @@
     <title>Document</title>
   </head>
   <body>
+    <table></table>
     <script>
       document.body.style.background = "white";
 
@@ -18,30 +19,36 @@
 
       async function display() {
         let res = await apiCall();
+
+        let fragment = document.createDocumentFragment();
+
         for (let x = 0; x < res.length; x++) {
-          const article = document.createElement("div");
+          let row = document.createElement("tr");
+
+          const article = document.createElement("td");
           article.innerHTML = res[x].name;
 
-          const link = document.createElement("a");
+          const link = document.createElement("td");
           link.innerHTML = res[x].article;
           link.href = res[x].article;
+
+          const likeCount = document.createElement("td");
+          likeCount.innerHTML = res[x].likes;
 
           const button = document.createElement("button");
           button.innerHTML = "Like";
           //   button.setAttribute("OnClick");
 
-          const likeCount = document.createElement("p");
-          likeCount.innerHTML = res[x].likes;
+          row.appendChild(article);
+          row.appendChild(link);
+          row.appendChild(likeCount);
+          row.appendChild(button);
 
-          document.body.appendChild(article);
-          document.body.appendChild(link);
-          document.body.appendChild(button);
-          document.body.appendChild(likeCount);
+          fragment.appendChild(row);
         }
-      }
 
-      // async function makeDOM() {
-      //   let res = apiCall();
+        document.querySelector("table").appendChild(fragment);
+      }
 
       display();
     </script>

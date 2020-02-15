@@ -8,20 +8,29 @@
   <body>
     <script>
       let form = document.createElement("form");
-      form.id = form;
+      form.id = "form";
 
       let input = document.createElement("input");
       input.type = "text";
+      input.name = "article";
 
       form.appendChild(input);
 
       let button = document.createElement("button");
       button.innerHTML = "Submit";
 
-      button.addEventListener("click", async () => {
-        let formData = new FormData(document.querySelector("form"));
+      button.addEventListener("click", getFormData);
+
+      form.appendChild(button);
+      document.body.appendChild(form);
+
+      async function getFormData() {
+        let formData = new FormData(document.getElementById("form"));
         // let {article} = formData
-        console.log(formData);
+        console.log(input.name);
+        let data = document.createElement("div");
+        data.innerHTML = JSON.stringify(formData);
+        document.body.appendChild(data);
         // try {
         //   await fetch("http://localhost:5000/api/articles", {
         //     method: "POST",
@@ -33,10 +42,7 @@
         // } catch (error) {
         //   console.log(error);
         // }
-      });
-
-      form.appendChild(button);
-      document.body.appendChild(form);
+      }
     </script>
   </body>
 </html>
