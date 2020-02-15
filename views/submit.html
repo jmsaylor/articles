@@ -6,12 +6,37 @@
     <title>Document</title>
   </head>
   <body>
-    <form id="my-form">
-      <input type="text" name="article_link" value="Values of my input" />
-      <input type="submit" />
-    </form>
     <script>
-      console.log(document.getElementById("my-form").elements);
+      let form = document.createElement("form");
+      form.id = form;
+
+      let input = document.createElement("input");
+      input.type = "text";
+
+      form.appendChild(input);
+
+      let button = document.createElement("button");
+      button.innerHTML = "Submit";
+
+      button.addEventListener("click", async () => {
+        let formData = new FormData(document.querySelector("form"));
+        // let {article} = formData
+        console.log(formData);
+        // try {
+        //   await fetch("http://localhost:5000/api/articles", {
+        //     method: "POST",
+        //     body: {
+        //       article:
+        //     }
+
+        //   });
+        // } catch (error) {
+        //   console.log(error);
+        // }
+      });
+
+      form.appendChild(button);
+      document.body.appendChild(form);
     </script>
   </body>
 </html>
