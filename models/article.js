@@ -25,7 +25,7 @@ let articleSchema = new mongoose.Schema({
   }
 });
 
-articleSchema.methods.addLike = function() {
+articleSchema.methods.like = function() {
   this.likes += 1;
 };
 

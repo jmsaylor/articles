@@ -12,12 +12,19 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   let article = new Article({
     poster: req.body.poster,
-    name: req.body.article,
+    name: await getTitle(req.body.article),
     article: req.body.article
   });
 
   await article.save();
 
+  res.send(article);
+});
+
+router.patch("/:id", async (req, res) => {
+  let article = await Article.findById(req.params.id);
+  article.like();
+  await article.save();
   res.send(article);
 });
 

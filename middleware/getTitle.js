@@ -5,6 +5,7 @@ async function getTitle(url) {
     let response = await fetch(url)
       .then(res => res.text())
       .then(body => body.match(/<title>(?<title>.*)<\/title>/i).groups.title);
+    //think about rewriting with querySelect or getElementbyId 'title'
     return response;
   } catch (error) {
     console.error(error);

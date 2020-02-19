@@ -11,6 +11,15 @@
       <input type="text" placeholder="Link" name="article" />
       <button id="submit" type="submit">Submit</button>
     </form>
+    <div id="info">
+      Just paste your link & submit. The rest of your information is generated
+      automatically
+    </div>
+    <div id="disclaimer">
+      *By submitting a link you agree to the Terms of Service with Evil Corp.
+      Thank You :)
+    </div>
+    <br />
     <table></table>
     <script>
       document.body.style.background = "white";
@@ -32,16 +41,41 @@
           const article = document.createElement("td");
           article.innerHTML = res[x].name;
 
+          //Trying to get the link to be clickable
           const link = document.createElement("td");
-          link.innerHTML = res[x].article;
-          link.href = res[x].article;
+          const link_url = document.createElement("a");
+          const link_text = document.createElement("div");
+          link_url.href = res[x].article;
+          link.appendChild(link_url);
+          link.innerHTML = link_url;
+          link.setAttribute("href", res[x].article);
 
           const likeCount = document.createElement("td");
           likeCount.innerHTML = res[x].likes;
+          likeCount.setAttribute("id", res[x].article);
 
           const button = document.createElement("button");
+          button.type = "submit";
           button.innerHTML = "Like";
-          //   button.setAttribute("OnClick");
+          button.id = "like";
+
+          //this is the beginnings of the Like button
+          row.addEventListener("click", async e => {
+            e.preventDefault();
+            const id = res[x]._id;
+            const data = await fetch(
+              `http://localhost:3000/api/articles/${id}`,
+              {
+                method: "PATCH"
+                // body: new FormData(e.target)
+                // was going to change this way but now it happens in IEP method
+              }
+            ).then(response => response.json());
+            likeCount.innerHTML = data.likes;
+
+            // document.getElementById(this)
+            // The last step - grabbing the right element & updating like count
+          });
 
           row.appendChild(article);
           row.appendChild(link);
