@@ -13,7 +13,7 @@ let articleSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    default: "Blank Name Field" // see /functions/getTitle
+    default: "Blank Name Field" // see /middleware/getTitle
   },
   likes: {
     type: Number,
@@ -27,6 +27,10 @@ let articleSchema = new mongoose.Schema({
 
 articleSchema.methods.like = function() {
   this.likes += 1;
+};
+
+articleSchema.methods.unlike = function() {
+  this.likes -= 1;
 };
 
 let Article = mongoose.model("Articles", articleSchema);

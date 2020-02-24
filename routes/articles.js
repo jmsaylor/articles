@@ -23,8 +23,14 @@ router.post("/", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
   let article = await Article.findById(req.params.id);
-  article.like();
+  article.like(); //Is this according with the Information Expert Principle
+  //By using the objects method to adjust its own values
   await article.save();
+  res.send(article);
+});
+
+router.delete("/:id", async (req, res) => {
+  let article = await Article.findOneAndDelete({ _id: req.params.id });
   res.send(article);
 });
 
